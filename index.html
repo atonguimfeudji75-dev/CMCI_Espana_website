@@ -2110,6 +2110,23 @@
       }
     }
 
+    /* Mobile fix: an earlier .events-more rule (60px side padding) was
+       overriding the smaller mobile padding further up the file just
+       because it came later in the source. Placing the mobile override
+       here, after both, guarantees it wins on phones. Also force the
+       event image grid to a single full-width column so cards can't
+       be forced wider than the screen (which was pushing them off
+       to the right instead of centering them). */
+    @media (max-width: 600px) {
+      .events-more {
+        padding: 50px 16px;
+      }
+
+      .events-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
 
     .justify-text {
       text-align: justify;
