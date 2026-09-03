@@ -550,6 +550,61 @@
 
     .vision {
       background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ===== Navy blob motion effect (Mission Banner + Vision section only) ===== */
+    .navy-blobs {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .navy-blobs svg {
+      position: absolute;
+      width: 160%;
+      height: 160%;
+      top: -30%;
+      left: -30%;
+    }
+
+    .navy-blob {
+      animation: navyDrift 13s ease-in-out infinite;
+      transform-origin: center;
+      opacity: 0.5;
+    }
+
+    .navy-blob--2 {
+      animation-duration: 16s;
+      animation-direction: reverse;
+      opacity: 0.32;
+    }
+
+    .navy-blob--3 {
+      animation-duration: 19s;
+      opacity: 0.22;
+    }
+
+    @keyframes navyDrift {
+      0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+      20%  { transform: translate(8%, -10%) rotate(25deg) scale(1.18); }
+      40%  { transform: translate(-9%, 7%) rotate(-18deg) scale(0.85); }
+      60%  { transform: translate(10%, 9%) rotate(15deg) scale(1.12); }
+      80%  { transform: translate(-6%, -8%) rotate(-22deg) scale(0.92); }
+      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .navy-blob { animation: none; }
+    }
+
+    /* Keep vision section's real content above its blob layer */
+    .vision > *:not(.navy-blobs) {
+      position: relative;
+      z-index: 1;
     }
 
     .vision-grid {
@@ -758,6 +813,8 @@
       max-width: 800px;
       margin: 0 auto 20px;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 4px 24px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 1;
     }
 
     .mission-banner cite {
@@ -769,6 +826,8 @@
       font-style: normal;
       font-weight: 600;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 1;
     }
 
     .contact {
@@ -2205,12 +2264,44 @@
 
   <!-- MISSION BANNER -->
   <div class="mission-banner">
+    <div class="navy-blobs" aria-hidden="true">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <path class="navy-blob navy-blob--1" fill="#0F172A"
+          d="M 250 400 C 150 300 350 100 500 150 C 650 200 800 150 850 300
+             C 900 450 800 550 750 650 C 700 750 550 850 400 800
+             C 250 750 200 600 150 500 C 120 450 200 430 250 400 Z" />
+        <path class="navy-blob navy-blob--2" fill="#0F172A"
+          d="M 600 200 C 750 150 900 250 880 400 C 860 550 950 650 850 750
+             C 750 850 600 800 500 750 C 400 700 350 600 400 500
+             C 450 400 500 250 600 200 Z" />
+        <path class="navy-blob navy-blob--3" fill="#0F172A"
+          d="M 350 600 C 300 500 400 400 500 420 C 600 440 700 400 750 500
+             C 800 600 750 700 650 720 C 550 740 450 720 400 680
+             C 370 660 380 630 350 600 Z" />
+      </svg>
+    </div>
     <blockquote>"La sangre de Jesús es suficiente para las almas de los hombres que perecen."</blockquote>
     <cite>—Profesor Zacharias Tanee Fomum, Fundador de la CMCI</cite>
   </div>
 
   <!-- VISION -->
   <section class="vision" id="vision">
+    <div class="navy-blobs" aria-hidden="true">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <path class="navy-blob navy-blob--1" fill="#0F172A"
+          d="M 250 400 C 150 300 350 100 500 150 C 650 200 800 150 850 300
+             C 900 450 800 550 750 650 C 700 750 550 850 400 800
+             C 250 750 200 600 150 500 C 120 450 200 430 250 400 Z" />
+        <path class="navy-blob navy-blob--2" fill="#0F172A"
+          d="M 600 200 C 750 150 900 250 880 400 C 860 550 950 650 850 750
+             C 750 850 600 800 500 750 C 400 700 350 600 400 500
+             C 450 400 500 250 600 200 Z" />
+        <path class="navy-blob navy-blob--3" fill="#0F172A"
+          d="M 350 600 C 300 500 400 400 500 420 C 600 440 700 400 750 500
+             C 800 600 750 700 650 720 C 550 740 450 720 400 680
+             C 370 660 380 630 350 600 Z" />
+      </svg>
+    </div>
     <div style="text-align:center;max-width:700px;margin:0 auto">
       <div class="section-tag">Nuestra visión</div>
       <h2 class="section-title">Tres Grandes <em>Misiones</em> para Nuestra Generación</h2>
@@ -2525,9 +2616,6 @@
         <a href="https://www.tiktok.com/@cmciespain?_r=1&_t=ZN-97z2OnmG0Vq" target="_blank" class="social-link tiktok" title="TikTok" aria-label="TikTok">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.15 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.31 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
         </a>
-        <!--<a href="https://twitter.com" target="_blank" class="social-link twitter" title="Twitter / X" aria-label="Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a> -->
         <a href="https://wa.me/34612208263" target="_blank" class="social-link whatsapp" title="WhatsApp" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.713.308 1.27.492 1.704.629.716.227 1.367.195 1.882.118.574-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
 </a> 
